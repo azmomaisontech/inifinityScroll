@@ -28,10 +28,16 @@ async function getPost() {
 
 //Perform the infinite Scroll
 window.addEventListener("scroll", () => {
+  //  On the right of your screen, when you scroll down, there is a scroll bar,
+  //  The invisible column where the scroll bar is On, will be called scroll section
+  //  scrollTop =  the distance between the top of the scroll bar, and the top of the window
+  //  scrollHeight = The overall height of the scroll section
+  //  clientHeight = The height of your device page.
   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-  console.log({ scrollTop, scrollHeight, clientHeight });
-
+  //We are adding 5 to the left hand side of the equation(I knw! removing 5 on the right,
+  //   is just like adding 5 to the left), this is because the scrolltop is hardly a whole
+  // number, always decimal, so we need to add some px to it to make it whole
   if (clientHeight + scrollTop >= scrollHeight - 5) {
     // show the loading animation
     showLoading();
@@ -55,7 +61,9 @@ function addDataToDOM(data) {
 		<p>${data.post.body}</p>
 		<div class="user-info">
 			<img src="${data.user.picture.large}" alt="${data.user.name.first}" />
-			<span>${data.user.name.first} ${data.user.name.last}</span>
+            <span>${data.user.name.first} ${data.user.name.last}</span>
+            <span>${data.user.email} </span>
+
 		</div>
 	`;
   container.appendChild(postElement);
